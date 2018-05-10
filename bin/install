@@ -1,0 +1,24 @@
+install() {
+    local version=$1
+    local install_path=$2
+
+    if [ "$TMPDIR" = "" ]; then
+        local work_path="$(mktemp -d -t kobalt_install_XXXXXX)"
+    else
+        local work_path="${TMPDIR%/}"
+    fi
+
+    local zip_name="kobalt-${version}.zip"
+    curl -Lo "$work_path/$zip_name" -C - "https://github.com/cbeust/kobalt/releases/download/${version}/kobalt-${version}.zip"
+
+    (
+        cd "$work_path" || exit 1
+        unzip "$zip_name" || exit 1
+
+	cd "kobalt-${version}"
+	chmod +x bin/kobaltw
+        cp -r * $ASDF_INSTALL_PATH
+    )
+}
+
+install $ASDF_INSTALL_VERSION $ASDF_INSTALL_PATH
