@@ -13,7 +13,7 @@ install() {
 
     (
         cd "$work_path" || exit 1
-        unzip "$zip_name" || exit 1
+        unzip -qq "$zip_name" || exit 1
 
 	cd "kobalt-${version}"
 	chmod +x bin/kobaltw

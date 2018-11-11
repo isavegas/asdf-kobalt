@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
-versions=("$(curl https://api.github.com/repos/cbeust/kobalt/tags | sed -n 's/\s*\"name\":\s*\"\([0-9.]*\)\",/\1/p' | tr '\n' ' ')")
+versions=("$(curl -s https://api.github.com/repos/cbeust/kobalt/tags | sed -n 's/\s*\"name\":\s*\"\([0-9.]*\)\",/\1/p' | tr '\n' ' ')")
 
 echo $versions
