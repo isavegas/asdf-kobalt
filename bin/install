@@ -16,6 +16,8 @@ install() {
         unzip -qq "$zip_name" || exit 1
 
 	cd "kobalt-${version}"
+        # Github release has \r\n for line endings, which breaks #!
+        sed -i 's/\r$//' bin/kobaltw
 	chmod +x bin/kobaltw
         cp -r * $ASDF_INSTALL_PATH
     )
